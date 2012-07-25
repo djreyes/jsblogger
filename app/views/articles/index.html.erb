@@ -10,4 +10,9 @@
 
 <%= link_to "New Article", new_article_path, :class => "new_article" %>
 
+
+<%= link_to "Ordered by Title", articles_path(:order_by => "title") %>
+<%= link_to "Ordered by Published Date", articles_path(:order_by => "published") %>
+<%= link_to "Ordered by Word Count", articles_path(:order_by => "wordcount") %>
+
             <%= d @article %>

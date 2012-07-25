@@ -22,4 +22,14 @@ class Article < ActiveRecord::Base
       tagging.tag_id = tag.id
     end
   end
+
+  def self.ordered_by(params)
+    limit = "LIMIT #{params[:limit]}" unless params[:limit] == nil
+    case params[:order_by]
+    when 'title'     then Article.order("title #{limit}")
+    when 'published' then Article.order("created_at DESC #{limit}")
+    when 'wordcount' then Article.order("length(body) #{limit}")
+    else                  Article.all
+    end
+  end
 end
