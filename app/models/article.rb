@@ -23,7 +23,7 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def self.ordered_by(params)
+  def self.only(params)
     limit = "LIMIT #{params[:limit]}" unless params[:limit] == nil
     case params[:order_by]
     when 'title'     then Article.order("title #{limit}")
@@ -32,4 +32,5 @@ class Article < ActiveRecord::Base
     else                  Article.all
     end
   end
+
 end
