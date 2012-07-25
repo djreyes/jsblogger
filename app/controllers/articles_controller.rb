@@ -14,14 +14,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    @current_user = current_user
     @article = Article.new(params[:article])
-    @article.save
-    warn "********************************************\n"
-    warn @article.inspect
+    if @article.save
+      redirect_to @article, :notice => "Successfully saved article"
+    else
+      render :action => "new"
+    end
     audit @article.inspect
-    warn "********************************************\n"
-
-    redirect_to article_path(@article)
   end
 
   def destroy

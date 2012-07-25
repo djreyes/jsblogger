@@ -1,5 +1,13 @@
+
 class Article < ActiveRecord::Base
+
+  include TextValidations
+
   attr_accessible :title, :body, :tag_list, :image
+
+  validates :title, :presence => true, :format => {:without => /jeremy/}
+  validates :body, :presence => true, :format => {:without => /jeremy/}
+  validate :valid_text
 
   has_many :comments
   has_many :taggings
